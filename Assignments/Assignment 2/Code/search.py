@@ -78,6 +78,18 @@ def mediumClassicSearch(problem):
     e = Directions.EAST
     n = Directions.NORTH
     return  [e,e,e,e,n,n,e,e,s,s,e,e,e]
+def mediumMazeSearch(problem):
+    from game import Directions
+    s = Directions.SOUTH
+    w = Directions.WEST
+    e = Directions.EAST
+    n = Directions.NORTH
+    return  [s,s,w,w,w,w,s,s,e,e,e,e,s,s,
+             w,w,w,w,s,s,e,e,e,e,s,s,
+             w,w,w,w,s,s,e,e,e,e,s,s,s,
+             w,w,w,w,w,w,w,
+             n,w,w,w,w,w,w,w,w,w,w,w,w, w,w,w,w,w,
+             s,w,w,w,w,w,w,w,w,w]
 
 def mySearch(problem):
     from game import Directions
