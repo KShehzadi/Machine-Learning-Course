@@ -71,6 +71,13 @@ def tinyMazeSearch(problem):
     s = Directions.SOUTH
     w = Directions.WEST
     return  [s,s, w,s,w,w,s,w]
+def mediumClassicSearch(problem):
+    from game import Directions
+    s = Directions.SOUTH
+    w = Directions.WEST
+    e = Directions.EAST
+    n = Directions.NORTH
+    return  [e,e,e,e,n,n,e,e,s,s,e,e,e]
 
 def mySearch(problem):
     from game import Directions
