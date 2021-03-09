@@ -70,7 +70,7 @@ def tinyMazeSearch(problem):
     from game import Directions
     s = Directions.SOUTH
     w = Directions.WEST
-    return  [s,s]
+    return  [s,s, w,s,w,w,s,w]
 
 def mySearch(problem):
     from game import Directions
