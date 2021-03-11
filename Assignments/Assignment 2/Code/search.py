@@ -91,6 +91,36 @@ def mediumMazeSearch(problem):
              n,w,w,w,w,w,w,w,w,w,w,w,w, w,w,w,w,w,
              s,w,w,w,w,w,w,w,w,w]
 
+
+def bigMazeSearch(problem):
+    from game import Directions
+    s = Directions.SOUTH
+    w = Directions.WEST
+    e = Directions.EAST
+    n = Directions.NORTH
+    return   [n, n, w, w, w, w, n, n, w,
+              w, s, s, w, w, w, w, w, w, w,
+              w, w, w, w, w, w, w, n, n, e,
+              e, n, n, w, w, n, n, n, n, n,
+              n, e, e, e, e, e, e, s, s, e,
+              e, n, n, e, e, e, e, n, n, e,
+              e, s, s, e, e, n, n, n, n, n,
+              n, e, e, e, e, n, n, n, n, n,
+              n, n, n, n, n, w, w, s, s, w,
+              w, w, w, s, s, s, s, s, s, w,
+              w, s, s, s, s, w, w, n, n, w,
+              w, w, w, w, w, w, w, w, w, w,
+              w, n, n, e, e, n, n, n, n, n,
+              n, e, e, e, e, e, e, n, n, n,
+              n, n, n, n, n, w, w, w, w, w,
+              w, s, s, w, w, w, w, s, s, s,
+              s, e, e, s, s, w, w, w, w, w,
+              w, w, w, w, w, s, s, s, s, s,
+              s, s, s, s, s, e, e, s, s, s,
+              s, w, w, s, s, s, s, e, e, s,
+              s, w, w, s, s, s, s, w, w, s, s]
+
+
 def mySearch(problem):
     from game import Directions
     s = Directions.SOUTH
