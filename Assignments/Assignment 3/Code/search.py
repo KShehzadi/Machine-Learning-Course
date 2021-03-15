@@ -16,9 +16,8 @@
 In search.py, you will implement generic search algorithms which are called by
 Pacman agents (in searchAgents.py).
 """
-import sys
+
 import util
-import queue
 
 class SearchProblem:
     """
@@ -71,56 +70,7 @@ def tinyMazeSearch(problem):
     from game import Directions
     s = Directions.SOUTH
     w = Directions.WEST
-    return  [s,s, w,s,w,w,s,w]
-def mediumClassicSearch(problem):
-    from game import Directions
-    s = Directions.SOUTH
-    w = Directions.WEST
-    e = Directions.EAST
-    n = Directions.NORTH
-    return  [e,e,e,e,n,n,e,e,s,s,e,e,e]
-def mediumMazeSearch(problem):
-    from game import Directions
-    s = Directions.SOUTH
-    w = Directions.WEST
-    e = Directions.EAST
-    n = Directions.NORTH
-    return  [s,s,w,w,w,w,s,s,e,e,e,e,s,s,
-             w,w,w,w,s,s,e,e,e,e,s,s,
-             w,w,w,w,s,s,e,e,e,e,s,s,s,
-             w,w,w,w,w,w,w,
-             n,w,w,w,w,w,w,w,w,w,w,w,w, w,w,w,w,w,
-             s,w,w,w,w,w,w,w,w,w]
-
-
-def bigMazeSearch(problem):
-    from game import Directions
-    s = Directions.SOUTH
-    w = Directions.WEST
-    e = Directions.EAST
-    n = Directions.NORTH
-    return   [n, n, w, w, w, w, n, n, w,
-              w, s, s, w, w, w, w, w, w, w,
-              w, w, w, w, w, w, w, n, n, e,
-              e, n, n, w, w, n, n, n, n, n,
-              n, e, e, e, e, e, e, s, s, e,
-              e, n, n, e, e, e, e, n, n, e,
-              e, s, s, e, e, n, n, n, n, n,
-              n, e, e, e, e, n, n, n, n, n,
-              n, n, n, n, n, w, w, s, s, w,
-              w, w, w, s, s, s, s, s, s, w,
-              w, s, s, s, s, w, w, n, n, w,
-              w, w, w, w, w, w, w, w, w, w,
-              w, n, n, e, e, n, n, n, n, n,
-              n, e, e, e, e, e, e, n, n, n,
-              n, n, n, n, n, w, w, w, w, w,
-              w, s, s, w, w, w, w, s, s, s,
-              s, e, e, s, s, w, w, w, w, w,
-              w, w, w, w, w, s, s, s, s, s,
-              s, s, s, s, s, e, e, s, s, s,
-              s, w, w, s, s, s, s, e, e, s,
-              s, w, w, s, s, s, s, w, w, s, s]
-
+    return  [s,s]
 
 def mySearch(problem):
     from game import Directions
@@ -135,8 +85,7 @@ def mySearch(problem):
     print(childStates)
     print(leftChild)
     return [s]
-
-
+    
 def depthFirstSearch(problem):
     """
     Search the deepest nodes in the search tree first.
@@ -151,33 +100,15 @@ def depthFirstSearch(problem):
     print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
-
     return []
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
-    currentState = problem.getStartState()
-    F = util.Queue()
-    E = []
-    a = []
-    paths= {}
-    F.push(currentState)
-    paths[currentState] = []
-    while not F.isEmpty():
-        currentState = F.pop()
-        path = paths[currentState]
-        E.append(currentState)
-        if problem.isGoalState(currentState):
-            return path
-        else:
-            for child in  problem.getSuccessors(currentState):
-                if (child[0] not in E) and (not isExistInQ(F, child[0])):
-                    F.push(child[0])
-                    a.append(child[1])
-                    paths[child[0]] = path + a
-                    a = []
+  
     return []
 
+def uniformCostSearch(problem):
+    """Search the node of least total cost first."""
                     
     return []
 
@@ -189,7 +120,7 @@ def nullHeuristic(state, problem=None):
     return 0
 
 def aStarSearch(problem, heuristic=nullHeuristic):
- 
+    """Search the node that has the lowest combined cost and heuristic first."""
                     
     return []
 
