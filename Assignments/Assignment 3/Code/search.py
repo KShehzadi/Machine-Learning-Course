@@ -149,24 +149,13 @@ def breadthFirstSearch(problem):
 
 
 def uniformCostSearch(problem):
-    return []
-def nullHeuristic(state, problem=None):
-    """
-    A heuristic function estimates the cost from the current state to the nearest
-    goal in the provided SearchProblem.  This heuristic is trivial.
-    """
-    return 0
-
-def aStarSearch(problem, heuristic=nullHeuristic):
-    """Search the node that has the lowest combined cost and heuristic first."""
+    """Search the node of least total cost first."""
     currentState = problem.getStartState()
     F = util.PriorityQueue()
     E = []
     a = []
     paths= {}
-    goalState = problem.goal
-    i = abs(currentState[0] - goalState[0]) + abs(currentState[1] - goalState[1])
-    F.push(currentState,  i)
+    F.push(currentState, 0)
     paths[currentState] = []
     while not F.isEmpty():
         currentState = F.pop()
@@ -177,10 +166,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
         else:
             for child in  problem.getSuccessors(currentState):
                 if (child[0] not in E) and (not isExistInPQ(F, child[0])):
-                    i = abs(child[0][0] - goalState[0]) + abs(child[0][1] - goalState[1])
-                    p = child[2] + i
-
-                    F.push(child[0], p)
+                    F.push(child[0], child[2])
                     a.append(child[1])
                     paths[child[0]] = path + a
                     a = []
@@ -189,6 +175,17 @@ def aStarSearch(problem, heuristic=nullHeuristic):
                     
     return []
 
+def nullHeuristic(state, problem=None):
+    """
+    A heuristic function estimates the cost from the current state to the nearest
+    goal in the provided SearchProblem.  This heuristic is trivial.
+    """
+    return 0
+
+def aStarSearch(problem, heuristic=nullHeuristic):
+ 
+                    
+    return []
 
 # Abbreviations
 bfs = breadthFirstSearch
