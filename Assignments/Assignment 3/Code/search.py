@@ -138,20 +138,21 @@ def mySearch(problem):
 
 
 def depthFirstSearch(problem):
-    return []
-        
+    """
+    Search the deepest nodes in the search tree first.
 
-def breadthFirstSearch(problem):
-    return []
+    Your search algorithm needs to return a list of actions that reaches the
+    goal. Make sure to implement a graph search algorithm.
 
+    To get started, you might want to try some of these simple commands to
+    understand the search problem that is being passed in:
 
-
-
-
-def breadthFirstSearch(problem):
-    """Search the shallowest nodes in the search tree first."""
+    print("Start:", problem.getStartState())
+    print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
+    print("Start's successors:", problem.getSuccessors(problem.getStartState()))
+    """
     currentState = problem.getStartState()
-    F = util.Queue()
+    F = util.Stack()
     E = []
     a = []
     paths= {}
@@ -165,14 +166,13 @@ def breadthFirstSearch(problem):
             return path
         else:
             for child in  problem.getSuccessors(currentState):
-                if (child[0] not in E) and (not isExistInQ(F, child[0])):
+                if (child[0] not in E):
                     F.push(child[0])
                     a.append(child[1])
                     paths[child[0]] = path + a
                     a = []
     return []
 
-def uniformCostSearch(problem):
    
                     
     return []
