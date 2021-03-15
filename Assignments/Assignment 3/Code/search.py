@@ -148,14 +148,14 @@ def breadthFirstSearch(problem):
 
 
 
-def uniformCostSearch(problem):
-    """Search the node of least total cost first."""
+def breadthFirstSearch(problem):
+    """Search the shallowest nodes in the search tree first."""
     currentState = problem.getStartState()
-    F = util.PriorityQueue()
+    F = util.Queue()
     E = []
     a = []
     paths= {}
-    F.push(currentState, 0)
+    F.push(currentState)
     paths[currentState] = []
     while not F.isEmpty():
         currentState = F.pop()
@@ -165,13 +165,15 @@ def uniformCostSearch(problem):
             return path
         else:
             for child in  problem.getSuccessors(currentState):
-                if (child[0] not in E) and (not isExistInPQ(F, child[0])):
-                    F.push(child[0], child[2])
+                if (child[0] not in E) and (not isExistInQ(F, child[0])):
+                    F.push(child[0])
                     a.append(child[1])
                     paths[child[0]] = path + a
                     a = []
-                elif isExistInPQ(F, child[0]):
-                    F.update(child[0], child[2])
+    return []
+
+def uniformCostSearch(problem):
+   
                     
     return []
 
