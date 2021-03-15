@@ -150,7 +150,14 @@ def breadthFirstSearch(problem):
 
 def uniformCostSearch(problem):
     return []
+def nullHeuristic(state, problem=None):
+    """
+    A heuristic function estimates the cost from the current state to the nearest
+    goal in the provided SearchProblem.  This heuristic is trivial.
+    """
+    return 0
 
+def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     currentState = problem.getStartState()
     F = util.PriorityQueue()
@@ -180,6 +187,7 @@ def uniformCostSearch(problem):
                 elif isExistInPQ(F, child[0]):
                     F.update(child[0], child[2])
                     
+    return []
 
 
 # Abbreviations
