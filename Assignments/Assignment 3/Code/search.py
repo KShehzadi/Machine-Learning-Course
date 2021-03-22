@@ -18,6 +18,7 @@ Pacman agents (in searchAgents.py).
 """
 
 import util
+import math
 
 class SearchProblem:
     """
@@ -85,6 +86,17 @@ def mySearch(problem):
     print(childStates)
     print(leftChild)
     return [s]
+def isExistInPQ(self, item):
+    for p in self.heap:
+        if(item == p):
+            return True
+    return False
+
+def isExistInQ(self, item):
+    for p in self.list:
+        if(item == p):
+            return True
+    return False
     
 def depthFirstSearch(problem):
     """
@@ -100,15 +112,78 @@ def depthFirstSearch(problem):
     print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
+    currentState = problem.getStartState()
+    F = util.Stack()
+    E = []
+    a = []
+    paths= {}
+    F.push(currentState)
+    paths[currentState] = []
+    while not F.isEmpty():
+        currentState = F.pop()
+        path = paths[currentState]
+        E.append(currentState)
+        if problem.isGoalState(currentState):
+            return path
+        else:
+            successors = problem.getSuccessors(currentState)
+            #successors.reverse()
+            for child in  successors:
+                if (child[0] not in E) and (not isExistInQ(F, child[0])):
+                    F.push(child[0])
+                    a.append(child[1])
+                    paths[child[0]] = path + a
+                    a = []
     return []
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
-  
+    currentState = problem.getStartState()
+    F = util.Queue()
+    E = []
+    a = []
+    paths= {}
+    F.push(currentState)
+    paths[currentState] = []
+    while not F.isEmpty():
+        currentState = F.pop()
+        path = paths[currentState]
+        E.append(currentState)
+        if problem.isGoalState(currentState):
+            return path
+        else:
+            for child in  problem.getSuccessors(currentState):
+                if (child[0] not in E) and (not isExistInQ(F, child[0])):
+                    F.push(child[0])
+                    a.append(child[1])
+                    paths[child[0]] = path + a
+                    a = []
     return []
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
+    currentState = problem.getStartState()
+    F = util.PriorityQueue()
+    E = []
+    a = []
+    paths= {}
+    F.push(currentState, 0)
+    paths[currentState] = []
+    while not F.isEmpty():
+        currentState = F.pop()
+        path = paths[currentState]
+        E.append(currentState)
+        if problem.isGoalState(currentState):
+            return path
+        else:
+            for child in  problem.getSuccessors(currentState):
+                if (child[0] not in E) and (not isExistInPQ(F, child[0])):
+                    F.push(child[0], child[2])
+                    a.append(child[1])
+                    paths[child[0]] = path + a
+                    a = []
+                elif isExistInPQ(F, child[0]):
+                    F.update(child[0], child[2])
                     
     return []
 
@@ -118,9 +193,49 @@ def nullHeuristic(state, problem=None):
     goal in the provided SearchProblem.  This heuristic is trivial.
     """
     return 0
-
+def manHattanHeuristic(state, problem=None):
+    goalState = problem.goal
+    i = abs(state[0][0] - goalState[0]) + abs(state[0][1] - goalState[1])
+    p = state[2] + i
+    return p;
+def EuclideanHeuristic(state, problem=None):
+    goalState = problem.goal
+    i = math.sqrt((state[0][0] - goalState[0])**2 + (state[0][1] - goalState[1])**2)
+    p = state[2] + i
+    return p;
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
+    currentState = problem.getStartState()
+    F = util.PriorityQueue()
+    E = []
+    a = []
+    paths= {}
+    goalState = problem.goal
+    #i = abs(currentState[0] - goalState[0]) + abs(currentState[1] - goalState[1])
+    i = math.sqrt((currentState[0] - goalState[0])**2 + (currentState[1] - goalState[1])**2)
+    F.push(currentState,  i)
+    paths[currentState] = []
+    while not F.isEmpty():
+        currentState = F.pop()
+        path = paths[currentState]
+        E.append(currentState)
+        if problem.isGoalState(currentState):
+            return path
+        else:
+            for child in  problem.getSuccessors(currentState):
+                if (child[0] not in E) and (not isExistInPQ(F, child[0])):
+                    
+                    # using absolute distance heuristic
+                    #p = manHattanHeuristic(child, problem);
+                    
+                    # using Euclidean Heuristic
+                    p = EuclideanHeuristic(child, problem)
+                    F.push(child[0], p)
+                    a.append(child[1])
+                    paths[child[0]] = path + a
+                    a = []
+                elif isExistInPQ(F, child[0]):
+                    F.update(child[0], child[2])
                     
     return []
 
